@@ -20,7 +20,12 @@ def lista_para_caracter(lista):
 		texto += ' ' + index
 	return texto
 
-def leArquivo(nomeArq):
+def escreve_arquivo(texto):
+	arquivo = open('saida.txt', 'w')
+	arquivo.writelines(texto)
+	arquivo.close()
+
+def le_arquivo(nomeArq):
 	
 	arq = open(nomeArq,'r')
 	texto = arq.readline()
@@ -85,9 +90,7 @@ def separa_informacoes(matriz_generica):
 		dicionario['trans'] = quebra_lista(dicionario['trans'], 3)
 		dicionario['out-fn'] = remove_espacos_vazios(dicionario['out-fn'], dicionario['start'][0])
 		dicionario['out-fn'] = quebra_lista(dicionario['out-fn'], 2)
-	print(dicionario)
-	cria_texto(dicionario)
-
+		moore_to_mealy(dicionario)
 
 def cria_texto(dicionario):
 	texto_pronto = ''
@@ -137,7 +140,18 @@ def cria_texto(dicionario):
 	texto_pronto += ')'
 	escreve_arquivo(texto_pronto)
 
-def escreve_arquivo(texto):
-	arquivo = open('saida.txt', 'w')
-	arquivo.writelines(texto)
-	arquivo.close()
+def moore_to_mealy(dicionario):
+	print(dicionario)
+	pos_trans = 0
+
+	while dicionario['out-fn'] != []:
+		pos_trans = 0
+		for index_trans in dicionario['trans']:	
+			if (dicionario['out-fn'][0][0] == index_trans[1]):
+				print("entrei")
+				dicionario['trans'][pos_trans].append(dicionario['out-fn'][0][1])
+			pos_trans += 1
+		dicionario['out-fn'].remove(dicionario['out-fn'][0])
+	dicionario.pop('out-fn')
+	print(dicionario)
+	cria_texto(dicionario)

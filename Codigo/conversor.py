@@ -6,8 +6,7 @@ import sys
 
 def main():
 	
-	texto = conversorBib.leArquivo(sys.argv[2])
-	# conversorBib.maquina(conversorBib.tokens(texto),sys.argv[4])
+	conversorBib.le_arquivo(sys.argv[2])
 	
 if __name__=="__main__":
 	main()
