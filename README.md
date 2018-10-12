@@ -6,17 +6,17 @@ A máquina de mealy foi criada por George H. Mealy. <br>
 Em ciências da computação, uma máquina de Mealy é uma máquina de estado finito que produz um resultado (saída de dados) baseando-se no estado em que se encontra e na entrada de dados. Isto significa que o diagrama de estados irá incluir tanto o sinal de entrada como o de saída para cada vértice de transição. Em contraste, a saída de uma máquina de Moore depende apenas do estado actual da máquina, sendo que as transições não possuem qualquer sinal em anexo. Mesmo assim, por cada máquina de Mealy existe uma máquina de Moore equivalente cujos estados consistem na união dos estados da máquina de Mealy e o produto cartesiano dos estados da máquina de Mealy com o alfabeto de entrada de sinais.
 <br>A máquina de mealy é aplicada em leitor de códigos de barra, Semáforos, máquinas de vendas e relógio com temporizador.
 <br>Exemplo de máquina de mealy: <br>
-![Alt text](https://github.com/helenfranca/lfa/blob/master/prints/MaqMealy.PNG)
+![Alt text](https://github.com/lukasg18/LFA/blob/master/prints/MaqMealy.PNG)
 
 <br>Represetado em arquivo como: <br> 
-![Alt text](https://github.com/helenfranca/lfa/blob/master/prints/mealy.PNG)
+![Alt text](https://github.com/lukasg18/LFA/blob/master/prints/mealy.PNG)
 
 ## Máquina de Moore
 Na teoria da computação, uma máquina de Moore é um autômato de estado finito onde as saídas são determinadas pelo estado corrente apenas (e não pela entrada). O diagrama de estado para uma máquina de Moore inclui um sinal de saída para cada estado.
 <br>Exemplo de máquina de Moore:<br>
-![Alt text](https://github.com/helenfranca/lfa/blob/master/prints/MaqMoore.PNG)
+![Alt text](https://github.com/lukasg18/LFA/blob/master/prints/MaqMoore.PNG)
 <br>Represetado em arquivo como: <br>
-![Alt text](https://github.com/helenfranca/lfa/blob/master/prints/moore.PNG)
+![Alt text](https://github.com/lukasg18/LFA/blob/master/prints/moore.PNG)
 
 ### Código fonte
 
