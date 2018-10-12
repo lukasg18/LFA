@@ -45,13 +45,13 @@ Funções da biblioteca:
     
 * escreve_arquivo(texto, nome_saida): Escreve um texto no arquivo;
     
-* separa_informacoes(matriz_generica, nome_saida): Transforma uma matriz em um dicionario de dados, de acordo com a sintaxe definida pela maquina de moore ou de mealy;
+* separa_informacoes(matriz_generica, nome_saida): Transforma uma matriz em um dicionário de dados, de acordo com a sintaxe definida pela maquina de moore ou de mealy;
     
-* cria_texto(dicionario, nome_saida): Transforma um dicionario de dados em texto, de acordo com a sintaxe definida pela maquina de moore ou de mealy;
+* cria_texto(dicionario, nome_saida): Transforma um dicionário de dados em texto, de acordo com a sintaxe definida pela maquina de moore ou de mealy;
     
-* moore_to_mealy(dicionario, nome_saida): Transforma o dicionario com as informaçoes de moore para mealy;
+* moore_to_mealy(dicionario, nome_saida): Transforma o dicionário com as informaçoes de moore para mealy;
     
-* mealy_to_moore(dicionario, nome_saida): Transforma o dicionario com as informaçoes de mealy para moore;
+* mealy_to_moore(dicionario, nome_saida): Transforma o dicionário com as informaçoes de mealy para moore;
 
 ### Procedimento para compilação
 
