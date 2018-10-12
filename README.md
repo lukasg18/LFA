@@ -3,7 +3,7 @@ Trabalho desenvolvido como uma atividade na disciplina de Linguagens Formais e A
 
 ## Máquina de Mealy
 A máquina de mealy foi criada por George H. Mealy. <br>
-"Em ciências da computação, uma máquina de Mealy é uma máquina de estado finito que produz um resultado (saída de dados) baseando-se no estado em que se encontra e na entrada de dados. Isto significa que o diagrama de estados irá incluir tanto o sinal de entrada como o de saída para cada vértice de transição. Em contraste, a saída de uma máquina de Moore depende apenas do estado actual da máquina, sendo que as transições não possuem qualquer sinal em anexo. Mesmo assim, por cada máquina de Mealy existe uma máquina de Moore equivalente cujos estados consistem na união dos estados da máquina de Mealy e o produto cartesiano dos estados da máquina de Mealy com o alfabeto de entrada de sinais" Fonte:[Wikipédia](https://pt.wikipedia.org/wiki/M%C3%A1quina_de_Mealy).
+Em ciências da computação, uma máquina de Mealy é uma máquina de estado finito que produz um resultado (saída de dados) baseando-se no estado em que se encontra e na entrada de dados. Isto significa que o diagrama de estados irá incluir tanto o sinal de entrada como o de saída para cada vértice de transição. Em contraste, a saída de uma máquina de Moore depende apenas do estado actual da máquina, sendo que as transições não possuem qualquer sinal em anexo. Mesmo assim, por cada máquina de Mealy existe uma máquina de Moore equivalente cujos estados consistem na união dos estados da máquina de Mealy e o produto cartesiano dos estados da máquina de Mealy com o alfabeto de entrada de sinais.
 <br>A máquina de mealy é aplicada em leitor de códigos de barra, Semáforos, máquinas de vendas e relógio com temporizador.
 <br>Exemplo de máquina de mealy: <br>
 ![Alt text](https://github.com/helenfranca/lfa/blob/master/prints/MaqMealy.PNG)
@@ -12,7 +12,7 @@ A máquina de mealy foi criada por George H. Mealy. <br>
 ![Alt text](https://github.com/helenfranca/lfa/blob/master/prints/mealy.PNG)
 
 ## Máquina de Moore
-"Na teoria da computação, uma máquina de Moore é um autômato de estado finito onde as saídas são determinadas pelo estado corrente apenas (e não pela entrada). O diagrama de estado para uma máquina de Moore inclui um sinal de saída para cada estado." Fonte: [Wikipédia](https://pt.wikipedia.org/wiki/M%C3%A1quina_de_Moore)
+Na teoria da computação, uma máquina de Moore é um autômato de estado finito onde as saídas são determinadas pelo estado corrente apenas (e não pela entrada). O diagrama de estado para uma máquina de Moore inclui um sinal de saída para cada estado.
 <br>Exemplo de máquina de Moore:<br>
 ![Alt text](https://github.com/helenfranca/lfa/blob/master/prints/MaqMoore.PNG)
 <br>Represetado em arquivo como: <br>
@@ -20,56 +20,53 @@ A máquina de mealy foi criada por George H. Mealy. <br>
 
 ### Código fonte
 
- Arquivo principal que realiza a chamada da função de conversão.
+ Arquivo principal que realiza a chamada da função de conversão. O mesmo se encontra dentro do diretório "Codigo"
 
 ```
     conversor.py
 ```
 
-Biblioteca com as funções para a conversão das máquinas, entre elas estão a função de tratar S-Expressions e fazer a conversão das máquinas de Mealy pra Moore e de Moore pra Mealy.
+Biblioteca com as funções para a conversão das máquinas, entre elas estão a função de tratar S-Expressions e fazer a conversão das máquinas de Mealy pra Moore e de Moore pra Mealy. O mesmo se encontra dentro do diretório "Codigo"
 
 ``` 
     conversorBib.py
 ```
 
-Funções:
-```
-    > leArquivo(nomeArq) -> Lê o arquivo informado como entrada
+Funções da biblioteca:
+* le_arquivo(nomeArq): Lê o arquivo informado como entrada;
     
-    > tokens(texto) -> Recebe um texto e retorna uma lista com todos os tokens
+* remove_caracter(texto): Remove caracteres especiais ao ler o arquivo, como "()" e "\n";
     
-    > maquina(lista,arquivoSaida) -> Recebe uma lista e o aquivo de saída informado; Nessa função decide-se qual 
-    a máquina será convertida.
+* remove_arg_especifico(vetor_generico,*args): Remove argumentos especificos de um vetor, como por exemplo, espaços em branco;
     
-    > maqMealy(lstMealy) -> Recebe uma lista com os tokens da maquina de Mealy e retorna as listas correspondentes 
-    as palavras-chaves
+* quebra_lista(lista, n): Quebra uma lista em tamanhos determinados;
     
-    > maqMoore(lstMoore) -> Recebe uma lista com os tokens da maquina de Moore e retorna as listas correspondentes 
-    as palavras-chaves
+* lista_para_caracter(lista): Converte uma lista para uma string, colocando um espaço vazio entre as posições;
     
-    > comumMaq(lstMealy,index,lstIN,lstOUT,lstEstados,lstFinal,start) -> Recebe as listas correpondentes e em comum 
-    as máquinas e as modifica
+* escreve_arquivo(texto, nome_saida): Escreve um texto no arquivo;
     
-    > transMealy(DicFn,lstTran) -> Recebe um dicionário com os "out-fn" e uma lista com as transições de Moore e 
-    retorna uma lista com as transições em Mealy
+* separa_informacoes(matriz_generica, nome_saida): Transforma uma matriz em um dicionario de dados, de acordo com a sintaxe definida pela maquina de moore ou de mealy;
     
-    > transMoore(lstTran) -> Recebe uma lista com as transições de Mealy e retorna um dicionário com os "out-fn" e 
-    uma lista com as transições de Moore
+* cria_texto(dicionario, nome_saida): Transforma um dicionario de dados em texto, de acordo com a sintaxe definida pela maquina de moore ou de mealy;
     
-    > escreve(nome,lst,arquivoSaida) -> Recebe o nome da máquina, uma lista com a máquina a ser escrita e o nome do 
-    arquivo de saída que será criado e escreve as informações nele
+* moore_to_mealy(dicionario, nome_saida): Transforma o dicionario com as informaçoes de moore para mealy;
     
-    > formaTexto(x,lst) -> Recebe uma string x e uma lista com a máquina e retorna uma string formada com as 
-    informações em comum das máquinas.
-    
-```
+* mealy_to_moore(dicionario, nome_saida): Transforma o dicionario com as informaçoes de mealy para moore;
+
 ### Procedimento para compilação
 
 No prompt de comando:
 ```
     conversor.py -i <nome_do_arquivo_de_entrada.txt> -o <nome_do_arquivo_de_saida.txt>
     
-    Exemplo: conversor.py -i moore.txt -o saida.txt
+    Exemplo: python conversor.py -i ../Exemplos/mealy1.txt -o saida.txt
     
 ```
 
+### Referências
+
+* [https://pt.wikipedia.org/wiki/M%C3%A1quina_de_Moore](https://pt.wikipedia.org/wiki/M%C3%A1quina_de_Moore)
+
+* [https://pt.wikipedia.org/wiki/M%C3%A1quina_de_Mealy](https://pt.wikipedia.org/wiki/M%C3%A1quina_de_Mealy).
+
+* [http://www3.ifrn.edu.br/~jurandy/fdp/doc/aprenda-python/capitulo_10.html](http://www3.ifrn.edu.br/~jurandy/fdp/doc/aprenda-python/capitulo_10.html).
