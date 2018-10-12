@@ -156,27 +156,46 @@ def moore_to_mealy(dicionario):
 
 def mealy_to_moore(dicionario):
 	# print(dicionario)
-	lista_states = [1,1]
-	lista_pesos = [1,1]
 	states_dicionario = {}
-	count = 1
 	pesquisa = 1
 	dicionario.update({'out-fn': []})
 	
-
+	
+	#carregando o out-fn 
 	for index in dicionario['trans']:
 		dicionario['out-fn'].append(index[1])
 		dicionario['out-fn'].append(index[3])
 	dicionario['out-fn'] = quebra_lista(dicionario['out-fn'], 2)
-
-	print(dicionario)
 	
+	# retirando valores repetidos do out-fn
 	for index in range(0, len(dicionario['out-fn'])): 
 		pesquisa = (index + 1)
 		while pesquisa < (len(dicionario['out-fn'])):
 			if (dicionario['out-fn'][index] == dicionario['out-fn'][pesquisa]):
 				dicionario['out-fn'].remove(dicionario['out-fn'][pesquisa])
 			pesquisa += 1
+	
+	#criando um dicionario auxilixar para fazer o update no dicionario original
+	for index in range(0, len(dicionario['out-fn'])): 
+		pesquisa = (index + 1)
+		while pesquisa < (len(dicionario['out-fn'])):
+			if (dicionario['out-fn'][index][0] == dicionario['out-fn'][pesquisa][0]):
+				states_dicionario[(str(dicionario['out-fn'][pesquisa][0] + dicionario['out-fn'][pesquisa][1]))] = dicionario['out-fn'][pesquisa]
+				states_dicionario[(str(dicionario['out-fn'][index][0] + dicionario['out-fn'][index][1]))] = dicionario['out-fn'][index]
+			pesquisa += 1
+	
+	#update no dicionario original nas transicoes
+	for index in range(0, len(dicionario['trans'])): 
+		pesquisa = (index + 1)
+		for key in states_dicionario:
+			print(states_dicionario[key])
+			# if (dicionario['trans'][index][1] == key[0]):
+			pesquisa += 1
+
+	#update no dicionario original nos estados
+	for index in states_dicionario:
+		dicionario['states'].append(index)
 
 
-	print(dicionario)
+	# print(dicionario)
+	print(states_dicionario)
