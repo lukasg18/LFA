@@ -86,6 +86,7 @@ def separa_informacoes(matriz_generica):
 
 	if dicionario['nome'] == 'mealy':
 		dicionario['trans'] = quebra_lista(dicionario['trans'], 4)
+		mealy_to_moore(dicionario)
 	else :
 		dicionario['trans'] = quebra_lista(dicionario['trans'], 3)
 		dicionario['out-fn'] = remove_espacos_vazios(dicionario['out-fn'], dicionario['start'][0])
@@ -141,17 +142,41 @@ def cria_texto(dicionario):
 	escreve_arquivo(texto_pronto)
 
 def moore_to_mealy(dicionario):
-	print(dicionario)
 	pos_trans = 0
 
 	while dicionario['out-fn'] != []:
 		pos_trans = 0
 		for index_trans in dicionario['trans']:	
 			if (dicionario['out-fn'][0][0] == index_trans[1]):
-				print("entrei")
 				dicionario['trans'][pos_trans].append(dicionario['out-fn'][0][1])
 			pos_trans += 1
 		dicionario['out-fn'].remove(dicionario['out-fn'][0])
 	dicionario.pop('out-fn')
-	print(dicionario)
 	cria_texto(dicionario)
+
+def mealy_to_moore(dicionario):
+	# print(dicionario)
+	lista_states = [1,1]
+	lista_pesos = [1,1]
+	states_dicionario = {}
+	count = 1
+	pesquisa = 1
+	dicionario.update({'out-fn': []})
+	
+
+	for index in dicionario['trans']:
+		dicionario['out-fn'].append(index[1])
+		dicionario['out-fn'].append(index[3])
+	dicionario['out-fn'] = quebra_lista(dicionario['out-fn'], 2)
+
+	print(dicionario)
+	
+	for index in range(0, len(dicionario['out-fn'])): 
+		pesquisa = (index + 1)
+		while pesquisa < (len(dicionario['out-fn'])):
+			if (dicionario['out-fn'][index] == dicionario['out-fn'][pesquisa]):
+				dicionario['out-fn'].remove(dicionario['out-fn'][pesquisa])
+			pesquisa += 1
+
+
+	print(dicionario)
