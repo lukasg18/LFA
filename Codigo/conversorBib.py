@@ -183,19 +183,32 @@ def mealy_to_moore(dicionario):
 				states_dicionario[(str(dicionario['out-fn'][pesquisa][0] + dicionario['out-fn'][pesquisa][1]))] = dicionario['out-fn'][pesquisa]
 				states_dicionario[(str(dicionario['out-fn'][index][0] + dicionario['out-fn'][index][1]))] = dicionario['out-fn'][index]
 			pesquisa += 1
-	
+
+	print(dicionario)
+
 	#update no dicionario original nas transicoes
 	for index in range(0, len(dicionario['trans'])): 
 		pesquisa = (index + 1)
 		for key in states_dicionario:
-			print(states_dicionario[key])
-			# if (dicionario['trans'][index][1] == key[0]):
-			pesquisa += 1
+			if (dicionario['trans'][index][1] == states_dicionario[key][0] and dicionario['trans'][index][3] == states_dicionario[key][1]):
+				dicionario['trans'][index][1] = key
+
+	#update no dicionario original nas transicoes
+	for index in range(0, len(dicionario['out-fn'])): 
+		pesquisa = (index + 1)
+		for key in states_dicionario:
+			if (dicionario['out-fn'][index][0] == states_dicionario[key][0] and dicionario['out-fn'][index][1] == states_dicionario[key][1]):
+				dicionario['out-fn'][index][0] = key
 
 	#update no dicionario original nos estados
 	for index in states_dicionario:
 		dicionario['states'].append(index)
+	
+	# apagando pesos das transicoes
+	for index in dicionario['trans']:
+		del(index[3])
 
 
-	# print(dicionario)
+	print(dicionario)
 	print(states_dicionario)
+	cria_texto(dicionario)
