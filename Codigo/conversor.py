@@ -6,7 +6,9 @@ import sys
 
 def main():
 	
-	conversorBib.le_arquivo(sys.argv[2])
+	matriz = conversorBib.le_arquivo(sys.argv[2])
+	conversorBib.separa_informacoes(matriz, sys.argv[4])
+	# conversorBib.maquina(conversorBib.tokens(texto),sys.argv[4])
 	
 if __name__=="__main__":
 	main()

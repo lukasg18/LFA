@@ -4,7 +4,7 @@ def remove_caracter(texto) :
         texto = texto.replace(remove[i],"")
     return texto
 
-def remove_espacos_vazios(vetor_generico,*args):
+def remove_arg_especifico(vetor_generico,*args):
     deletar = list(args)
     for item in deletar:
         while item in vetor_generico:
@@ -20,8 +20,8 @@ def lista_para_caracter(lista):
 		texto += ' ' + index
 	return texto
 
-def escreve_arquivo(texto):
-	arquivo = open('saida.txt', 'w')
+def escreve_arquivo(texto, nome_saida):
+	arquivo = open(nome_saida, 'w')
 	arquivo.writelines(texto)
 	arquivo.close()
 
@@ -35,16 +35,14 @@ def le_arquivo(nomeArq):
 	while texto != '':
 		texto = remove_caracter(texto)
 		vetor_generico= texto.split(" ")
-		vetor_generico = remove_espacos_vazios(vetor_generico,'')
+		vetor_generico = remove_arg_especifico(vetor_generico,'')
 		matriz_generica.append(vetor_generico)
 		texto = arq.readline()
 
 	arq.close()
-	separa_informacoes(matriz_generica)
+	return matriz_generica
 
-	return texto
-
-def separa_informacoes(matriz_generica):
+def separa_informacoes(matriz_generica, nome_saida):
 	dicionario = {}
 	trans = []
 	out_fn = []
@@ -86,14 +84,14 @@ def separa_informacoes(matriz_generica):
 
 	if dicionario['nome'] == 'mealy':
 		dicionario['trans'] = quebra_lista(dicionario['trans'], 4)
-		mealy_to_moore(dicionario)
+		mealy_to_moore(dicionario, nome_saida)
 	else :
 		dicionario['trans'] = quebra_lista(dicionario['trans'], 3)
-		dicionario['out-fn'] = remove_espacos_vazios(dicionario['out-fn'], dicionario['start'][0])
+		dicionario['out-fn'] = remove_arg_especifico(dicionario['out-fn'], dicionario['start'][0])
 		dicionario['out-fn'] = quebra_lista(dicionario['out-fn'], 2)
-		moore_to_mealy(dicionario)
+		moore_to_mealy(dicionario, nome_saida)
 
-def cria_texto(dicionario):
+def cria_texto(dicionario, nome_saida):
 	texto_pronto = ''
 	trocar = ''
 
@@ -139,9 +137,9 @@ def cria_texto(dicionario):
 			texto_pronto += ')'
 
 	texto_pronto += ')'
-	escreve_arquivo(texto_pronto)
+	escreve_arquivo(texto_pronto, nome_saida)
 
-def moore_to_mealy(dicionario):
+def moore_to_mealy(dicionario, nome_saida):
 	pos_trans = 0
 
 	while dicionario['out-fn'] != []:
@@ -152,16 +150,16 @@ def moore_to_mealy(dicionario):
 			pos_trans += 1
 		dicionario['out-fn'].remove(dicionario['out-fn'][0])
 	dicionario.pop('out-fn')
-	cria_texto(dicionario)
+	cria_texto(dicionario, nome_saida)
 
-def mealy_to_moore(dicionario):
+def mealy_to_moore(dicionario, nome_saida):
 	# print(dicionario)
 	states_dicionario = {}
 	pesquisa = 1
 	dicionario.update({'out-fn': []})
 	
 	
-	#carregando o out-fn 
+	#criando e carregando o out-fn 
 	for index in dicionario['trans']:
 		dicionario['out-fn'].append(index[1])
 		dicionario['out-fn'].append(index[3])
@@ -184,8 +182,6 @@ def mealy_to_moore(dicionario):
 				states_dicionario[(str(dicionario['out-fn'][index][0] + dicionario['out-fn'][index][1]))] = dicionario['out-fn'][index]
 			pesquisa += 1
 
-	print(dicionario)
-
 	#update no dicionario original nas transicoes
 	for index in range(0, len(dicionario['trans'])): 
 		pesquisa = (index + 1)
@@ -197,7 +193,7 @@ def mealy_to_moore(dicionario):
 	for index in range(0, len(dicionario['out-fn'])): 
 		pesquisa = (index + 1)
 		for key in states_dicionario:
-			if (dicionario['out-fn'][index][0] == states_dicionario[key][0] and dicionario['out-fn'][index][1] == states_dicionario[key][1]):
+			if (dicionario['out-fn'][index] == states_dicionario[key]):
 				dicionario['out-fn'][index][0] = key
 
 	#update no dicionario original nos estados
@@ -209,6 +205,4 @@ def mealy_to_moore(dicionario):
 		del(index[3])
 
 
-	print(dicionario)
-	print(states_dicionario)
-	cria_texto(dicionario)
+	cria_texto(dicionario, nome_saida)
